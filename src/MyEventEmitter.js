@@ -10,6 +10,8 @@ class MyEventEmitter {
       this.events[eventName] = [];
     }
     this.events[eventName].push(listener);
+
+    return this;
   }
 
   once(eventName, listener) {
@@ -19,6 +21,8 @@ class MyEventEmitter {
     };
 
     this.on(eventName, onceWraper);
+
+    return this;
   }
 
   off(eventName, listener) {
@@ -37,7 +41,10 @@ class MyEventEmitter {
         delete this.events[eventName];
       }
     }
+
+    return this;
   }
+
   emit(eventName, ...args) {
     const listeners = this.events[eventName];
 
@@ -60,6 +67,8 @@ class MyEventEmitter {
     }
 
     this.events[eventName].unshift(listener);
+
+    return this;
   }
 
   prependOnceListener(eventName, listener) {
@@ -69,6 +78,8 @@ class MyEventEmitter {
     };
 
     this.prependListener(eventName, onceWraper);
+
+    return this;
   }
 
   removeAllListeners(eventName) {
@@ -77,7 +88,10 @@ class MyEventEmitter {
     } else {
       this.events = {};
     }
+
+    return this;
   }
+
   listenerCount(eventName) {
     const listeners = this.events[eventName];
 
